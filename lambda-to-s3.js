@@ -30,9 +30,7 @@ exports.handler = (event, context, callback) => {
 						records.push(payload);
 						});
 		console.log('record count = ' + records.length);
-
 		put_to_s3(records.join(LINE_TERMINATOR));
-
 		callback(null, `Successfully processed ${event.Records.length} records.`);
 };
 
@@ -45,24 +43,24 @@ function put_to_s3(data) {
             ContentType: "application/json"
         };
 		s3.putObject(params, function(err, data) {
-						if (err) {
-								console.log(err)
-						} else { 
-								console.log("Successfully uploaded data to myBucket/myKey");
-						}
-				});
+                if (err) {
+                        console.log(err)
+                } else { 
+                        console.log("Successfully uploaded data to myBucket/myKey");
+                }
+        });
 }
 
 function get_s3_key() {
     moment = moment();
-        return sprintf("%s%s%s-%s-%s-%s",
-                S3_PREFIX,
-                moment.format('YYYY/MM/DD/HH/'),
-                STREAM_NAME,
-                SHARD_ID,
-                moment.format('YYYY-MM-DD-HH-mm-ss'),
-                guid()
-            );
+    return sprintf("%s%s%s-%s-%s-%s",
+            S3_PREFIX,
+            moment.format('YYYY/MM/DD/HH/'),
+            STREAM_NAME,
+            SHARD_ID,
+            moment.format('YYYY-MM-DD-HH-mm-ss'),
+            guid()
+        );
 }
 
 function guid() {

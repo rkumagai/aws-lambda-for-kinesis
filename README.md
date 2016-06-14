@@ -87,7 +87,7 @@ $ aws kinesis get-records --shard-iterator "AAAAAAAAAAG6EH0nqAwW67aq0gx1h1dzR43t
 ## Set variables & npm packages
 
 ```
-$ FUNCTION_NAME=testKinesisStreamToS3
+$ FUNCTION_NAME={YOUR_FUNCTION_NAME}
 $ ROLE_NAME=arn:aws:iam::{YOUR_ROLE_NUMBER}:{YOUR_ROLE_NAME}
 ```
 
@@ -108,5 +108,4 @@ $ zip -r myLambdaFunction.zip lambda-to-s3.js node_modules
 ```
 $ aws lambda upload-function --function-name=$FUNCTION_NAME --function-zip=myLambdaFunction.zip --runtime="nodejs4.3" --role=$ROLE_NAME --handler=lambda-to-s3.handler --mode=event
 ```
-
 
